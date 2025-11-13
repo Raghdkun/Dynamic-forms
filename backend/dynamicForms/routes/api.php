@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\SubmissionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+Route::middleware('auth.verify')->group(function () {
 // Field Types Routes
 Route::prefix('field-types')->group(function () {
     Route::get('/', [FieldTypeController::class, 'index']);
@@ -44,4 +45,5 @@ Route::prefix('forms/{formId}')->group(function () {
     Route::post('/submit', [SubmissionController::class, 'store']);
     Route::post('/submissions/query', [SubmissionController::class, 'query']);
     Route::get('/submissions/statistics', [SubmissionController::class, 'statistics']);
+});
 });
